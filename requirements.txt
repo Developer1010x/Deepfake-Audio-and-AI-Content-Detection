@@ -1,0 +1,7 @@
+Flask==2.3.4
+TensorFlow==2.14.0
+Keras==2.14.0
+torch==2.1.0
+transformers==4.30.0
+librosa==0.10.0
+numpy==1.24.3

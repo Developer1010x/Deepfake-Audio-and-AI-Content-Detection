@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deepfake Detection and AI Text Analysis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1e1e1e;
+            color: #ffffff;
+            transition: background-color 0.5s, color 0.5s;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 80px auto;
+            padding: 20px;
+            background-color: #333333;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            margin: 20px 0;
+            border-radius: 5px;
+            border: none;
+            background-color: #222222;
+            color: white;
+            resize: none;
+        }
+
+        input[type="file"] {
+            display: block;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #222222;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .light-mode {
+            background-color: #ffffff;
+            color: #ffffff; /* Keep text white in all modes */
+        }
+
+        .menu-bar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #333;
+            padding: 10px;
+            text-align: right;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .menu-bar select {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .menu-bar select:hover {
+            background-color: #45a049;
+        }
+
+        .loading {
+            display: none; /* Hide loading animation by default */
+            width: 12px;
+            height: 12px;
+            border: 2px solid #fff;
+            border-top: 2px solid #4CAF50;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="dark-mode">
+
+    <div class="menu-bar">
+        <select id="theme-select">
+            <option value="dark-mode">Dark Mode</option>
+            <option value="light-mode">Light Mode</option>
+        </select>
+    </div>
+
+    <div class="container">
+        <h1>Deepfake Detection & AI Text Analysis</h1>
+        
+        <div class="upload-section">
+            <h2>Upload an Audio File for Deepfake Detection</h2>
+            <form action="{{ url_for('upload_file') }}" method="POST" enctype="multipart/form-data">
+                <input type="file" name="file" required>
+                <button type="submit" id="upload-button">Upload <div class="loading"></div></button>
+            </form>
+        </div>
+
+        <div class="text-section">
+            <h2>Analyze Text for AI Generation</h2>
+            <form action="{{ url_for('analyze_text') }}" method="POST">
+                <textarea name="text" placeholder="Enter text here..." required></textarea>
+                <button type="submit" id="analyze-button">Analyze <div class="loading"></div></button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('theme-select').addEventListener('change', function () {
+            document.body.className = this.value;
+        });
+
+        document.querySelector('form').addEventListener('submit', function () {
+            document.querySelector('.loading').style.display = 'inline-block'; // Show loading animation only on form submission
+        });
+    </script>
+</body>
+</html>

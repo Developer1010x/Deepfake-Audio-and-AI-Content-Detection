@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detection Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1e1e1e;
+            color: #ffffff;
+            transition: background-color 0.5s, color 0.5s;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 80px auto;
+            padding: 20px;
+            background-color: #333333;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .result {
+            font-size: 1.2em;
+            margin: 20px 0;
+        }
+
+        .light-mode {
+            background-color: #ffffff;
+            color: #ffffff; /* Keep text white in all modes */
+        }
+
+        .menu-bar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #333;
+            padding: 10px;
+            text-align: right;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .menu-bar select {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .menu-bar select:hover {
+            background-color: #45a049;
+        }
+
+        .go-back {
+            margin-top: 20px;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .go-back:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body class="dark-mode">
+
+    <div class="menu-bar">
+        <select id="theme-select">
+            <option value="dark-mode">Dark Mode</option>
+            <option value="light-mode">Light Mode</option>
+        </select>
+    </div>
+
+    <div class="container">
+        <h1>Results</h1>
+
+        <div class="result">
+            {% if task == 'audio' %}
+                <p>{{ prediction }}</p>
+            {% elif task == 'text' %}
+                <p>{{ result }}</p>
+            {% endif %}
+        </div>
+
+        <a href="{{ url_for('index') }}" class="go-back">Go Back</a>
+    </div>
+
+    <script>
+        document.getElementById('theme-select').addEventListener('change', function () {
+            document.body.className = this.value;
+        });
+    </script>
+</body>
+</html>
